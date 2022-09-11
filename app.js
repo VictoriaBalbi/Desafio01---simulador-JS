@@ -1,16 +1,84 @@
+// DEFINICION DE VARIABLES → CANCIONES
+
+// creo el objeto 
+class Cancion {
+    constructor (titulo,artista, genero)
+    {
+        this.titulo = titulo;
+        this.artista =artista;
+        this.genero = genero;
+    }
+
+    // para mostrar la info de la cancion en los menues
+    mostrarInfoCancion(){
+        return `${this.titulo} - ${this.artista}`;
+    }
+}
+
+// creo cada cancion
+const cancionPop1 = new Cancion("As it was", "Harry Styles", "Pop");
+const cancionPop2 = new Cancion("Bam Bam", "Camila Cabello", "Pop");
+const cancionPop3 = new Cancion("Angels like you", "Miley Cyrus", "Pop");
+
+const cancionRock1 = new Cancion("Tan solo", "Los Piojos", "Rock");
+const cancionRock2 = new Cancion("El favor", "Las Pastillas del Abuelo", "Rock");
+const cancionRock3 = new Cancion("Tu encanto", "Conociendo Rusia", "Rock");
+
+// Creo usuarios ya registrados → ARRAY DE OBJETOS
+const usuarios = [
+    {nombre: "Vicki", contraseña: 1234},
+    {nombre: "Pepe", contraseña: 5678},
+    {nombre: "Coder", contraseña: 91011}
+]
+
 //FUNCIONES
 
 // Funcion para pedir usuario y contraseña para que puedan ingresar
 function usuarioContra (){
-    const usuario = prompt("Usuario: ");
-    const contraseña = prompt ("Contraseña: ");
-    if (usuario == "" || contraseña =="")
-    { // Si no ingresa nada:
-        alert("Usuario o contraseña invalida")
+    let registro= prompt (`Usted ya esta registrado: 
+    1) Si
+    2) No`);
+
+    
+    if (registro == "1")
+    {   
+        const usuario_ingresado = prompt("Ingrese su usuario: ");
+        const contraseña_ingresado  = prompt ("Contraseña: ");
+        
+        // recorro el array de usuarios para encontrar el que ingresa el usuario
+        usuarios.forEach((usuario) => {
+            if (usuario.nombre == usuario_ingresado && usuario.contraseña == contraseña_ingresado)
+            {
+                alert("Ingresando al sistema")
+                //si ingresa ya me lleva directo a la funcion de menu
+                menuInicio()
+                
+            }
+        });
+
+        //si llegue aca es porque no entro en la funcion de menu → no esta registrado
+        alert("Usuario y/o contraseña incorrecto/s")
+        usuarioContra()
+
+    } 
+    if (registro == "2")
+    {
+        const usuario_ingresado = prompt("Ingrese un nuevo usuario: ");
+        const contraseña_ingresado = prompt ("Contraseña: ");
+        if (contraseña_ingresado == "" || usuario_ingresado =="")
+        { // Si no ingresa nada:
+            alert("Usuario o contraseña invalida")
+            usuarioContra()
+        }
+        else{
+            // funciona el push pero si vuelvo a correr la funcion UsuarioContra() no registra los nuevos
+            usuarios.push(usuario_ingresado,contraseña_ingresado);
+            
+            menuInicio() 
+
+        }
     }
-    else{
-        menuInicio() 
-    }
+   
    
 }
 
@@ -177,31 +245,6 @@ function xArtista(artista){
     }
 }
 
-// DEFINICION DE VARIABLES → CANCIONES
-
-// creo el objeto 
-class Cancion {
-    constructor (titulo,artista, genero)
-    {
-        this.titulo = titulo;
-        this.artista =artista;
-        this.genero = genero;
-    }
-
-    // para mostrar la info de la cancion en los menues
-    mostrarInfoCancion(){
-        return `${this.titulo} - ${this.artista}`;
-    }
-}
-
-// creo cada cancion
-const cancionPop1 = new Cancion("As it was", "Harry Styles", "Pop");
-const cancionPop2 = new Cancion("Bam Bam", "Camila Cabello", "Pop");
-const cancionPop3 = new Cancion("Angels like you", "Miley Cyrus", "Pop");
-
-const cancionRock1 = new Cancion("Tan solo", "Los Piojos", "Rock");
-const cancionRock2 = new Cancion("El favor", "Las Pastillas del Abuelo", "Rock");
-const cancionRock3 = new Cancion("Tu encanto", "Conociendo Rusia", "Rock");
 
 // Ingreso
 usuarioContra()
