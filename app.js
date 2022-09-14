@@ -24,6 +24,9 @@ const cancionRock1 = new Cancion("Tan solo", "Los Piojos", "Rock");
 const cancionRock2 = new Cancion("El favor", "Las Pastillas del Abuelo", "Rock");
 const cancionRock3 = new Cancion("Tu encanto", "Conociendo Rusia", "Rock");
 
+// meto los objetos creados en 1 array
+const canciones = [cancionPop1, cancionPop2, cancionPop3, cancionRock1, cancionRock2, cancionRock3];
+
 // Creo usuarios ya registrados → ARRAY DE OBJETOS
 const usuarios = [
     {nombre: "Vicki", contraseña: 1234},
@@ -71,8 +74,8 @@ function usuarioContra (){
             usuarioContra()
         }
         else{
-            // funciona el push pero si vuelvo a correr la funcion UsuarioContra() no registra los nuevos
-            usuarios.push(usuario_ingresado,contraseña_ingresado);
+            //sumo el usuario nuevo al array
+            usuarios.push( {nombre: usuario_ingresado,contraseña: contraseña_ingresado} );
             
             menuInicio() 
 
@@ -147,22 +150,24 @@ function menuFiltrar ( opcion){
 function xGenero (genero){
     // OPCION 1 → POP
     if (genero == "1")
-    {   let cancion= prompt (`Elija una cancion: 
-        1) ${cancionPop1.mostrarInfoCancion()}
-        2) ${cancionPop2.mostrarInfoCancion()}
-        3) ${cancionPop3.mostrarInfoCancion()}`);
+    {   // me quedo solo con las canciones pop
+        let cancionespop = canciones.filter((cancion)=>cancion.genero=="Pop");
+        let cancion= prompt (`Elija una cancion: 
+        1) ${cancionespop[0].mostrarInfoCancion()}
+        2) ${cancionespop[1].mostrarInfoCancion()}
+        3) ${cancionespop[2].mostrarInfoCancion()}`);
 
         switch(cancion){
             case "1":
-                alert(`Reproduciendo ${cancionPop1.mostrarInfoCancion()}`)
+                alert(`Reproduciendo ${cancionespop[0].mostrarInfoCancion()}`)
                 menuInicio()
                 break;
             case "2":
-                alert(`Reproduciendo ${cancionPop2.mostrarInfoCancion()}`)
+                alert(`Reproduciendo ${cancionespop[1].mostrarInfoCancion()}`)
                 menuInicio()
                 break;
             case "3":
-                alert(`Reproduciendo ${cancionPop3.mostrarInfoCancion()}`)
+                alert(`Reproduciendo ${cancionespop[2].mostrarInfoCancion()}`)
                 menuInicio()
                 break;
             default:
@@ -174,22 +179,23 @@ function xGenero (genero){
     }
     // OPCION 2 → ROCK
     else if (genero == "2")
-    {   let cancion= prompt (`Elija una cancion: 
-        1) ${cancionRock1.mostrarInfoCancion()}
-        2) ${cancionRock2.mostrarInfoCancion()}
-        3) ${cancionRock3.mostrarInfoCancion()}`);
+    {   let cancionesrock = canciones.filter((cancion)=>cancion.genero=="Rock");
+        let cancion= prompt (`Elija una cancion: 
+            1) ${cancionesrock[0].mostrarInfoCancion()}
+            2) ${cancionesrock[1].mostrarInfoCancion()}
+            3) ${cancionesrock[2].mostrarInfoCancion()}`);
 
         switch(cancion){
             case "1":
-                alert(`Reproduciendo ${cancionRock1.mostrarInfoCancion()}`)
+                alert(`Reproduciendo ${cancionesrock[0].mostrarInfoCancion()}`)
                 menuInicio()
                 break;
             case "2":
-                alert(`Reproduciendo ${cancionRock2.mostrarInfoCancion()}`)
+                alert(`Reproduciendo ${cancionesrock[1].mostrarInfoCancion()}`)
                 menuInicio()
                 break;
             case "3":
-                alert(`Reproduciendo ${cancionRock3.mostrarInfoCancion()}`)
+                alert(`Reproduciendo ${cancionesrock[2].mostrarInfoCancion()}`)
                 menuInicio()
                 break;
             default:
